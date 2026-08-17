@@ -48,6 +48,8 @@ symbol = " "
 format = "[$version]($style)  "
 style = "bold #68A063"
 version_format = "${major}.${minor}.${patch}"
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+detect_folders = ["node_modules"]
 
 [time]
 disabled = false
