@@ -30,6 +30,7 @@ config.window_decorations = "RESIZE"
 config.send_composed_key_when_left_alt_is_pressed = false
 config.use_ime = true
 config.use_dead_keys = false
+config.enable_kitty_keyboard = true
 
 config.leader = {
     key = "q",

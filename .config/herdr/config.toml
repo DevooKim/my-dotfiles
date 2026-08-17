@@ -23,7 +23,7 @@ onboarding = false
 [terminal]
 # Executable used for new interactive panes.
 # Empty means $SHELL, then /bin/sh.
-default_shell = "zsh"
+# default_shell = ""
 
 # Startup mode for new interactive pane shells: "auto", "login", or "non_login".
 # "auto" uses login shells on macOS and keeps the current behavior elsewhere.
@@ -34,6 +34,11 @@ default_shell = "zsh"
 # "current" for Herdr's process directory, or a fixed path such as "~/Projects".
 # new_cwd = "follow"
 
+[update]
+# Update channel used by background checks and `herdr update`.
+# Use "stable" for normal releases or "preview" for opt-in preview builds.
+# channel = "stable"
+
 [keys]
 # Prefix key to enter prefix mode (default: "ctrl+b")
 # Examples: "ctrl+b", "f12", "esc", "-"
@@ -43,7 +48,7 @@ default_shell = "zsh"
 # Named punctuation such as minus, comma, ampersand, plus, and backtick is also accepted.
 # Most reliable direct bindings are ctrl+letter, function keys, and explicit modified chords.
 # alt+..., cmd/super, and punctuation-with-modifiers may depend on your terminal/tmux setup.
-prefix = "ctrl+b"
+prefix = "ctrl+a"
 
 # Prefix-mode actions
 # help = "prefix+?"
@@ -53,23 +58,23 @@ prefix = "ctrl+b"
 # open_notification_target = "prefix+o"
 # workspace_picker = "prefix+w"
 # goto = "prefix+g"
-new_workspace = "prefix+shift+n"
-new_worktree = "prefix+shift+g"
-open_worktree = "prefix+shift+o"    # optional, unset by default
-remove_worktree = "prefix+;"  # optional, unset by default; opens confirmation
+# new_workspace = "prefix+shift+n"
+# new_worktree = "prefix+shift+g"
+# open_worktree = ""    # optional, unset by default
+# remove_worktree = ""  # optional, unset by default; opens confirmation
 # rename_workspace = "prefix+shift+w"
 # close_workspace = "prefix+shift+d"
-previous_workspace = "prefix+u" # optional, unset by default
-next_workspace = "prefix+d"     # optional, unset by default
+# previous_workspace = "" # optional, unset by default
+# next_workspace = ""     # optional, unset by default
 # previous_agent = ""     # optional, unset by default
 # next_agent = ""         # optional, unset by default
-focus_agent = "prefix+ctrl+1..9"        # optional indexed binding, e.g. "prefix+alt+1..9"
+# focus_agent = ""        # optional indexed binding, e.g. "prefix+alt+1..9"
 # new_tab = "prefix+c"
 # rename_tab = "prefix+shift+t"
 # previous_tab = "prefix+p"
 # next_tab = "prefix+n"
 # switch_tab = "prefix+1..9"
-switch_workspace = "ctrl+1..9"   # optional indexed binding, e.g. "prefix+shift+1..9"
+# switch_workspace = ""   # optional indexed binding, e.g. "prefix+shift+1..9"
 # close_tab = "prefix+shift+x"
 # rename_pane = "prefix+shift+p"
 # edit_scrollback = "prefix+e"
@@ -77,10 +82,6 @@ switch_workspace = "ctrl+1..9"   # optional indexed binding, e.g. "prefix+shift+
 # focus_pane_down = "prefix+j"
 # focus_pane_up = "prefix+k"
 # focus_pane_right = "prefix+l"
-focus_pane_left = "alt+h"
-focus_pane_down = "alt+j"
-focus_pane_up = "alt+k"
-focus_pane_right = "alt+l"
 # cycle_pane_next = "prefix+tab"
 # cycle_pane_previous = "prefix+shift+tab"
 # last_pane = ""          # optional, unset by default; bind e.g. "prefix+tab" for global back-and-forth
@@ -103,34 +104,26 @@ focus_pane_right = "alt+l"
 # Custom commands use the same binding syntax.
 # type = "shell" runs detached in the background.
 # type = "pane" opens a temporary pane and closes it when the command exits.
+# [[keys.command]]
+# key = "prefix+alt+g"
+# type = "pane"
+# command = "lazygit"
+
 [[keys.command]]
 key = "alt+i"
 type = "shell"
 command = "zed ."
 
 [[keys.command]]
-key = "alt+f"
-type = "shell"
-command = "find ."
-
-[[keys.command]]
-key = "prefix+shift+r"
-type = "shell"
-command = "gh browse"
-description = "Open GitHub repo in browser"
-
-[[keys.command]]
-key = "prefix+shift+p"
-type = "shell"
-command = "gh pr view --web"
-description = "Open GitHub pull request in browser"
-
-
-[[keys.command]]
-key = "prefix+a"
+key = "prefix+f"
 type = "plugin_action"
-command = "cdragon.command-center.open"
-description = "Open Command Center"
+command = "dev.minung.herdr-f1.open"
+description = "open F1 dashboard"
+
+[[keys.command]]
+key = "prefix+t"
+type = "pane"
+command = "zsh"
 
 # Legacy indexed shortcut config is still parsed for compatibility.
 # Prefer switch_tab, switch_workspace, and focus_agent for new configs.
@@ -158,8 +151,12 @@ description = "Open Command Center"
 
 # Capture mouse input for Herdr's mouse UI.
 # Set false to let the terminal handle normal clicks, such as Cmd-clicking URLs.
-# Pane apps can still receive mouse when they request it.
+# Pane apps like lazygit and btop can still receive mouse when they request it.
 # mouse_capture = true
+
+# Optional modifier that forwards right-click hold/drag gestures to pane apps instead of opening Herdr's pane menu.
+# Empty/off disables this. Shift is intentionally unsupported because terminals commonly reserve Shift+mouse.
+# right_click_passthrough_modifier = ""
 
 # Force a full redraw when the outer terminal regains focus.
 # Set false to reduce visible flashing when switching back to Herdr.
@@ -212,7 +209,17 @@ delivery = "system"
 [session]
 # Resume supported AI-agent panes into their native conversation sessions after
 # a Herdr server restart. Requires official integrations that report session refs.
-# resume_agents_on_restore = false
+# resume_agents_on_restore = true
+
+[remote]
+# Whether herdr manages the ssh config used for the `herdr --remote` bridge.
+# When true (default), herdr runs the bridge ssh through a generated config that
+# includes your ~/.ssh/config first and adds ServerAliveInterval/
+# ServerAliveCountMax as a fallback (so any keepalive you set yourself still
+# wins) to survive idle network/NAT timeouts. Set false to run plain ssh against
+# your ssh config unchanged — this does not force keepalive off, it only stops
+# herdr from adding its own.
+# manage_ssh_config = true
 
 [experimental]
 # Allow launching herdr from inside a herdr-managed pane.
@@ -221,7 +228,12 @@ delivery = "system"
 # Requires a Kitty graphics-compatible outer terminal.
 # kitty_graphics = false
 # Save recent pane screen history across full server restarts.
-pane_history = false
+pane_history = true
+# While prefix mode is active, temporarily switch the macOS host input
+# source to an ASCII-capable keyboard layout so prefix commands register
+# even when a CJK IME is active, then restore the previous input source
+# when prefix mode exits. macOS only; best-effort. Default: false.
+# switch_ascii_input_source_in_prefix = false
 # Expose the focused pane's cursor to the outer terminal so macOS input
 # methods keep tracking the candidate window when TUIs paint their own
 # cursor (Claude Code, pi, codex). Trade-off: extra cursor visible for
@@ -231,7 +243,7 @@ pane_history = false
 # matches one of these names. Empty means apply to any focused pane.
 # If the list contains no valid names, the reveal does not apply.
 # Accepted: pi, claude, codex, gemini, cursor, cline, opencode, copilot,
-# kimi, kiro, droid, amp, grok, hermes, qodercli, qoder.
+# kimi, kiro, droid, amp, grok, hermes, kilo, qodercli, qoder.
 # cjk_ime_agents = []
 # Cursor shape rendered when reveal_hidden_cursor_for_cjk_ime is true.
 # Values: block, steady_block (default), underline, steady_underline, bar, steady_bar.
