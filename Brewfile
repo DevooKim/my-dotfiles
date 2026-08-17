@@ -1,0 +1,51 @@
+# Taps
+tap "nikitabobko/tap"
+tap "oven-sh/bun"
+
+# CLI tools
+brew "direnv"
+brew "docker"
+brew "fnm"
+brew "fzf"
+brew "gh"
+brew "jq"
+brew "lazygit"
+brew "mas"
+brew "ripgrep"
+brew "starship"
+brew "stow"
+brew "tree"
+brew "zoxide"
+brew "oven-sh/bun/bun", trusted: true
+
+# Applications
+# cask "nikitabobko/tap/aerospace", trusted: true
+cask "arc"
+cask "betterdisplay"
+cask "bitwarden"
+cask "claude"
+cask "codex"
+cask "ghostty"
+cask "google-chrome"
+cask "hammerspoon"
+cask "itsycal"
+cask "keka"
+cask "mac-mouse-fix"
+cask "mongodb-compass"
+cask "notion"
+cask "obsidian"
+cask "orbstack"
+cask "postman"
+cask "slack"
+cask "spotify"
+cask "visual-studio-code"
+cask "wezterm"
+cask "zed"
+
+# Fonts
+cask "font-d2coding"
+cask "font-google-sans-code"
+cask "font-jetbrains-mono"
+
+# Mac App Store
+mas "Amphetamine", id: 937984704

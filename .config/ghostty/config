@@ -1,0 +1,38 @@
+font-size = 16
+font-family = Google Sans Code
+font-family = D2Coding
+
+# font-style = Bold
+# font-style-bold = Bold
+
+background = #011423
+background-opacity = 0.9
+
+window-colorspace = display-p3
+
+cursor-color = #47FF9C
+# cursor-style = bar
+# adjust-cursor-thickness = 12
+
+# True color 지원
+term = ghostty
+
+# 클립보드 연동
+clipboard-read = allow
+clipboard-write = allow
+
+# macOS의 경우 Option 키를 Alt로 사용
+macos-option-as-alt = true
+
+split-divider-color = #47FF9C
+
+# 화면 분할
+keybind = cmd+d=new_split:right
+keybind = cmd+shift+d=new_split:down
+keybind = cmd+w=close_surface
+
+# 분할 화면 이동
+keybind = cmd+shift+h=goto_split:left
+keybind = cmd+shift+l=goto_split:right
+keybind = cmd+shift+k=goto_split:up
+keybind = cmd+shift+j=goto_split:down
