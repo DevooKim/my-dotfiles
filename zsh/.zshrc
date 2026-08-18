@@ -60,16 +60,16 @@ if (( $+commands[direnv] )); then
 fi
 
 # Aliases
-[[ -r "$HOME/.dotfiles/.config/zsh/alias.zsh" ]] && \
-  source "$HOME/.dotfiles/.config/zsh/alias.zsh"
+[[ -r "$HOME/.config/zsh/alias.zsh" ]] && \
+  source "$HOME/.config/zsh/alias.zsh"
 
 if (( $+commands[starship] )); then
   eval "$(starship init zsh)"
 fi
 
 # Functions and hooks
-[[ -r "$HOME/.dotfiles/.config/zsh/functions.zsh" ]] && \
-  source "$HOME/.dotfiles/.config/zsh/functions.zsh"
+[[ -r "$HOME/.config/zsh/functions.zsh" ]] && \
+  source "$HOME/.config/zsh/functions.zsh"
 
 # Must be loaded after all other ZLE plugins.
 [[ -r "$HOME/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
