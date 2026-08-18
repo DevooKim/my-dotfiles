@@ -1,6 +1,8 @@
 add_newline = false
 
 format = """
+$username\
+$hostname\
 $directory\
 $git_branch\
 $git_status\
@@ -10,6 +12,16 @@ $nodejs\
 $time\
 $line_break\
 $character"""
+
+[username]
+format = "[$user]($style)"
+style_user = "bold #C792EA"
+show_always = true
+
+[hostname]
+format = "[@$hostname]($style) "
+style = "bold #C792EA"
+ssh_only = false
 
 [directory]
 format = "[$path]($style) "
