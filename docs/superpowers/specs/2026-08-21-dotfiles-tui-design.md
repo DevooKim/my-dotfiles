@@ -2,7 +2,7 @@
 
 ## Goal
 
-Provide a polished macOS terminal UI, launched with `./setup`, that installs,
+Provide a polished macOS terminal UI, launched with `./bin/setup`, that installs,
 reapplies, updates, removes, and diagnoses the nine dotfile packages in this
 repository. Runtime use must not require Homebrew, GNU Stow, Go, fzf, gum,
 dialog, Node, or Bun.
@@ -10,15 +10,15 @@ dialog, Node, or Bun.
 ## Distribution
 
 The source is Go using Bubble Tea v2, Bubbles v2, and Lip Gloss v2. The
-repository commits one universal Mach-O executable, `./setup`, containing both
-arm64 and x86_64 slices. Go is needed only to develop, test, and rebuild this
+repository commits one universal Mach-O executable, `./bin/setup`, containing
+both arm64 and x86_64 slices. Go is needed only to develop, test, and rebuild this
 executable. It is recorded as a
 developer tool in `homebrew/Brewfile`, but the TUI never reads or runs that
 Brewfile.
 
 Builds use `CGO_ENABLED=0`, `GOOS=darwin`, and reproducibility-oriented linker
 flags. `tools/dotfiles-tui/build` tests both architecture builds, combines them
-with `lipo`, and atomically replaces `./setup`. The module and checksums live
+with `lipo`, and atomically replaces `./bin/setup`. The module and checksums live
 with all other TUI development files below `tools/dotfiles-tui/`.
 
 ## Scope
@@ -42,12 +42,12 @@ displayed or executed.
 - `tools/dotfiles-tui/internal/ui`: Bubble Tea state machine and Lip Gloss presentation for action
   selection, flat package selection, conflict decisions, preview,
   confirmation, progress, and results.
-- `setup`: the only root-level TUI artifact and universal runtime executable.
+- `bin/setup`: the universal runtime executable and only generated TUI artifact.
 - `tools/dotfiles-tui/build`: developer-only test and universal build command.
 
-The repository root is derived from the executable location and must be a
-directory. Package sources are inspected inside the UI so Doctor remains
-available when one is missing. The checkout can live anywhere. Bubble Tea owns
+The repository root is derived as the parent of the executable's `bin`
+directory and must be a directory. Package sources are inspected inside the UI
+so Doctor remains available when one is missing. The checkout can live anywhere. Bubble Tea owns
 terminal restoration on normal exit, cancellation, and signals.
 
 ## Package Mapping and Status
@@ -123,7 +123,7 @@ Final verification runs `go test ./...`, `go vet ./...`, both cross-builds,
 universal binary slice inspection, a PTY cancellation smoke test with temporary
 HOME, and `git diff --check`.
 
-Acceptance requires `./setup` to work without development tools on both Apple
+Acceptance requires `./bin/setup` to work without development tools on both Apple
 Silicon and Intel macOS; independent selection of all nine packages; preview
 and confirmation for mutations; preservation of correct Stow links; recoverable
 conflict backups; transactional filesystem changes; fast-forward-only Update;
