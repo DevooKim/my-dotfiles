@@ -345,6 +345,11 @@ func (m *Model) enterAction() tea.Cmd {
 		m.stage = stageUpdateConfirm
 		return nil
 	}
+	if m.action == ActionInstall {
+		for _, pkg := range m.packages {
+			m.selected[pkg.Name] = m.inspections[pkg.Name].Status == dotfiles.NotInstalled
+		}
+	}
 	m.packageCursor = 0
 	m.stage = stagePackages
 	return nil

@@ -77,7 +77,7 @@ func updateModel(t *testing.T, model *Model, msg tea.Msg) (*Model, tea.Cmd) {
 	return updated, cmd
 }
 
-func TestInstallOpensFlatPackageSelectionWithInstalledDefaults(t *testing.T) {
+func TestInstallOpensFlatPackageSelectionWithNotInstalledDefaults(t *testing.T) {
 	repo, home, packages := uiFixture(t)
 	model, err := NewModel(repo, home, packages, testDependencies(&uiGitRunner{}), false)
 	if err != nil {
@@ -88,8 +88,8 @@ func TestInstallOpensFlatPackageSelectionWithInstalledDefaults(t *testing.T) {
 	if model.stage != stagePackages || model.action != ActionInstall {
 		t.Fatalf("stage/action = %v/%v, want packages/install", model.stage, model.action)
 	}
-	if !model.selected["zsh"] || model.selected["wezterm"] {
-		t.Fatalf("default selection = %#v, want only installed zsh", model.selected)
+	if model.selected["zsh"] || !model.selected["wezterm"] {
+		t.Fatalf("default selection = %#v, want only not-installed wezterm", model.selected)
 	}
 }
 
@@ -139,8 +139,6 @@ func TestPreviewRequiresConfirmationAndShowsResult(t *testing.T) {
 	repo, home, packages := uiFixture(t)
 	model, _ := NewModel(repo, home, packages, testDependencies(&uiGitRunner{}), false)
 	model, _ = updateModel(t, model, keyMsg(tea.KeyEnter, ""))
-	model, _ = updateModel(t, model, keyMsg(tea.KeyDown, ""))
-	model, _ = updateModel(t, model, keyMsg(tea.KeySpace, " "))
 	model, _ = updateModel(t, model, keyMsg(tea.KeyEnter, ""))
 	if model.stage != stagePreview {
 		t.Fatalf("stage = %v, want preview", model.stage)
