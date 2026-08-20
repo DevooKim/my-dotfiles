@@ -134,6 +134,7 @@ func NewModel(repo, home string, packages []dotfiles.Package, deps Dependencies,
 	}
 	if afterUpdate {
 		model.action = ActionReapply
+		model.selectDefaults(ActionReapply)
 		model.stage = stagePackages
 	}
 	return model, nil
@@ -345,14 +346,16 @@ func (m *Model) enterAction() tea.Cmd {
 		m.stage = stageUpdateConfirm
 		return nil
 	}
-	if m.action == ActionInstall {
-		for _, pkg := range m.packages {
-			m.selected[pkg.Name] = m.inspections[pkg.Name].Status == dotfiles.NotInstalled
-		}
-	}
+	m.selectDefaults(m.action)
 	m.packageCursor = 0
 	m.stage = stagePackages
 	return nil
+}
+
+func (m *Model) selectDefaults(action Action) {
+	for _, pkg := range m.packages {
+		m.selected[pkg.Name] = action == ActionInstall && m.inspections[pkg.Name].Status == dotfiles.NotInstalled
+	}
 }
 
 func (m *Model) preparePlan() error {

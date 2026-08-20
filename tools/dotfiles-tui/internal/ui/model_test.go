@@ -93,6 +93,43 @@ func TestInstallOpensFlatPackageSelectionWithNotInstalledDefaults(t *testing.T) 
 	}
 }
 
+func TestReapplyOpensWithNoDefaultSelection(t *testing.T) {
+	repo, home, packages := uiFixture(t)
+	model, err := NewModel(repo, home, packages, testDependencies(&uiGitRunner{}), false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	model.actionCursor = int(ActionReapply)
+	model, _ = updateModel(t, model, keyMsg(tea.KeyEnter, ""))
+	if model.selected["zsh"] || model.selected["wezterm"] {
+		t.Fatalf("reapply default selection = %#v, want none", model.selected)
+	}
+}
+
+func TestRemoveOpensWithNoDefaultSelection(t *testing.T) {
+	repo, home, packages := uiFixture(t)
+	model, err := NewModel(repo, home, packages, testDependencies(&uiGitRunner{}), false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	model.actionCursor = int(ActionRemove)
+	model, _ = updateModel(t, model, keyMsg(tea.KeyEnter, ""))
+	if model.selected["zsh"] || model.selected["wezterm"] {
+		t.Fatalf("remove default selection = %#v, want none", model.selected)
+	}
+}
+
+func TestPostUpdateReapplyOpensWithNoDefaultSelection(t *testing.T) {
+	repo, home, packages := uiFixture(t)
+	model, err := NewModel(repo, home, packages, testDependencies(&uiGitRunner{}), true)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if model.selected["zsh"] || model.selected["wezterm"] {
+		t.Fatalf("post-update reapply default selection = %#v, want none", model.selected)
+	}
+}
+
 func TestPackageSelectionSupportsSelectAllClearAllAndToggle(t *testing.T) {
 	repo, home, packages := uiFixture(t)
 	model, _ := NewModel(repo, home, packages, testDependencies(&uiGitRunner{}), false)
