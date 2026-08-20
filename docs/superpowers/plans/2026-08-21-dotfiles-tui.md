@@ -4,7 +4,7 @@
 
 **Goal:** Build and commit a Go/Bubble Tea TUI plus native executables for Apple Silicon and Intel macOS.
 
-**Architecture:** A testable `tools/dotfiles-tui/internal/dotfiles` package owns filesystem and Git behavior, while `tools/dotfiles-tui/internal/ui` owns Bubble Tea state and rendering. Two static architecture builds are combined into the single root-level universal executable `./setup`; Go is only a development dependency.
+**Architecture:** A testable `tools/dotfiles-tui/internal/dotfiles` package owns filesystem and Git behavior, while `tools/dotfiles-tui/internal/ui` owns Bubble Tea state and rendering. Two static architecture builds are combined into the universal executable `./bin/setup`; Go is only a development dependency.
 
 **Tech Stack:** Go 1.26.7, `charm.land/bubbletea/v2`, `charm.land/bubbles/v2`, `charm.land/lipgloss/v2`, Apple `lipo`.
 
@@ -51,7 +51,7 @@
 ### Task 4: Universal native binary
 
 **Files:**
-- Create: `setup`
+- Create: `bin/setup`
 - Create: `tools/dotfiles-tui/build`
 - Create: `tools/dotfiles-tui/tests/universal_build_test.sh`
 

@@ -28,6 +28,7 @@ lipo -create \
   "$build_root/amd64" \
   -output "$build_root/setup"
 chmod +x "$build_root/setup"
-mv "$build_root/setup" "$repo_root/setup"
+mkdir -p "$repo_root/bin"
+mv "$build_root/setup" "$repo_root/bin/setup"
 
 sh tests/universal_build_test.sh

@@ -89,7 +89,19 @@ func repositoryRoot(explicit string) (string, error) {
 	if err != nil {
 		return "", fmt.Errorf("resolve executable: %w", err)
 	}
-	return filepath.Dir(executable), nil
+	return repositoryRootFromExecutable(executable)
+}
+
+func repositoryRootFromExecutable(executable string) (string, error) {
+	absolute, err := filepath.Abs(executable)
+	if err != nil {
+		return "", fmt.Errorf("resolve executable path: %w", err)
+	}
+	binDirectory := filepath.Dir(absolute)
+	if filepath.Base(binDirectory) != "bin" {
+		return "", fmt.Errorf("executable must be located in the repository bin directory")
+	}
+	return filepath.Dir(binDirectory), nil
 }
 
 type execFunc func(string, []string, []string) error

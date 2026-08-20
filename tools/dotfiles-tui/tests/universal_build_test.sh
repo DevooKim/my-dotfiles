@@ -3,7 +3,12 @@
 set -eu
 
 project_root=$(CDPATH= cd -- "$(dirname -- "$0")/../../.." && pwd)
-binary="$project_root/setup"
+binary="$project_root/bin/setup"
+
+if [ -e "$project_root/setup" ] || [ -L "$project_root/setup" ]; then
+  printf 'legacy root setup artifact still exists\n' >&2
+  exit 1
+fi
 
 description=$(file "$binary")
 case "$description" in

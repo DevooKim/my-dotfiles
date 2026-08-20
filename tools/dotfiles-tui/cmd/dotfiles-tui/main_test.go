@@ -22,7 +22,7 @@ func TestReexecIfRequestedRunsOnlyAfterProgramReturns(t *testing.T) {
 	called := false
 	var gotPath string
 	var gotArguments []string
-	err := reexecIfRequested(restartModel{restart: true}, "/repo/setup", "/repo", func(path string, arguments []string, _ []string) error {
+	err := reexecIfRequested(restartModel{restart: true}, "/repo/bin/setup", "/repo", func(path string, arguments []string, _ []string) error {
 		called = true
 		gotPath = path
 		gotArguments = arguments
@@ -31,10 +31,10 @@ func TestReexecIfRequestedRunsOnlyAfterProgramReturns(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !called || gotPath != "/repo/setup" {
+	if !called || gotPath != "/repo/bin/setup" {
 		t.Fatalf("called/path = %v/%q", called, gotPath)
 	}
-	want := []string{"/repo/setup", "--repo", "/repo", "--after-update"}
+	want := []string{"/repo/bin/setup", "--repo", "/repo", "--after-update"}
 	if !reflect.DeepEqual(gotArguments, want) {
 		t.Fatalf("arguments = %#v, want %#v", gotArguments, want)
 	}
@@ -42,7 +42,7 @@ func TestReexecIfRequestedRunsOnlyAfterProgramReturns(t *testing.T) {
 
 func TestReexecIfRequestedDoesNothingWithoutRestartFlag(t *testing.T) {
 	called := false
-	err := reexecIfRequested(restartModel{}, "/repo/setup", "/repo", func(string, []string, []string) error {
+	err := reexecIfRequested(restartModel{}, "/repo/bin/setup", "/repo", func(string, []string, []string) error {
 		called = true
 		return nil
 	})
@@ -61,5 +61,16 @@ func TestValidateRepositoryAllowsMissingPackagesSoDoctorCanRun(t *testing.T) {
 	}
 	if err := validateRepository(repo); err != nil {
 		t.Fatalf("validateRepository blocked Doctor: %v", err)
+	}
+}
+
+func TestRepositoryRootFromExecutableUsesParentOfBin(t *testing.T) {
+	got, err := repositoryRootFromExecutable(filepath.Join(string(filepath.Separator), "repo", "bin", "setup"))
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := filepath.Join(string(filepath.Separator), "repo")
+	if got != want {
+		t.Fatalf("repository root = %q, want %q", got, want)
 	}
 }
