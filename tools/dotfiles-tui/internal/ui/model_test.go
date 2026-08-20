@@ -34,9 +34,9 @@ func uiFixture(t *testing.T) (string, string, []dotfiles.Package) {
 	if err := os.MkdirAll(home, 0o755); err != nil {
 		t.Fatal(err)
 	}
-	writeUIFile(t, filepath.Join(repo, "zsh", ".zshrc"), "zsh")
-	writeUIFile(t, filepath.Join(repo, "wezterm", ".config", "wezterm", "wezterm.lua"), "wezterm")
-	if err := os.Symlink(filepath.Join(repo, "zsh", ".zshrc"), filepath.Join(home, ".zshrc")); err != nil {
+	writeUIFile(t, filepath.Join(dotfiles.PackageRoot(repo, "zsh"), ".zshrc"), "zsh")
+	writeUIFile(t, filepath.Join(dotfiles.PackageRoot(repo, "wezterm"), ".config", "wezterm", "wezterm.lua"), "wezterm")
+	if err := os.Symlink(filepath.Join(dotfiles.PackageRoot(repo, "zsh"), ".zshrc"), filepath.Join(home, ".zshrc")); err != nil {
 		t.Fatal(err)
 	}
 	return repo, home, []dotfiles.Package{

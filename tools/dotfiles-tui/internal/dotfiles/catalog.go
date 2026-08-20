@@ -1,10 +1,20 @@
 package dotfiles
 
+import "path/filepath"
+
+// packagesDirectory holds every selectable package inside the repository.
+const packagesDirectory = "packages"
+
 // Package describes one independently selectable dotfiles package.
 type Package struct {
 	Name        string
 	Description string
 	Command     string
+}
+
+// PackageRoot returns the repository path that holds the named package.
+func PackageRoot(repo, name string) string {
+	return filepath.Join(repo, packagesDirectory, name)
 }
 
 // Catalog returns the packages in their stable UI order.

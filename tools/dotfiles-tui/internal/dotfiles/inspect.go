@@ -83,7 +83,7 @@ func InspectPackage(repo, home string, pkg Package) (Inspection, error) {
 }
 
 func inspectMappings(repo, home string, pkg Package) ([]Mapping, error) {
-	packageRoot := filepath.Join(repo, pkg.Name)
+	packageRoot := PackageRoot(repo, pkg.Name)
 	info, err := os.Stat(packageRoot)
 	if err != nil {
 		return nil, fmt.Errorf("inspect package %q: %w", pkg.Name, err)

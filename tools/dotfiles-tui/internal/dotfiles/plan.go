@@ -255,7 +255,7 @@ func managedLinkAnchor(repo, home, packageName, target string) (string, error) {
 		if err != nil || startsWithParent(relative) {
 			return "", os.ErrNotExist
 		}
-		expected := filepath.Join(repo, packageName, relative)
+		expected := filepath.Join(PackageRoot(repo, packageName), relative)
 		expectedInfo, expectedErr := os.Stat(expected)
 		cursorInfo, cursorErr := os.Stat(cursor)
 		if expectedErr == nil && cursorErr == nil && os.SameFile(expectedInfo, cursorInfo) {

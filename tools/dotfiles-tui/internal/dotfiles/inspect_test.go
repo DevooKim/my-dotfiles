@@ -34,8 +34,8 @@ func zshFixture(t *testing.T) (string, string, Package) {
 	if err := os.MkdirAll(home, 0o755); err != nil {
 		t.Fatal(err)
 	}
-	writeFixtureFile(t, filepath.Join(repo, "zsh", ".zshrc"), "source")
-	writeFixtureFile(t, filepath.Join(repo, "zsh", ".config", "zsh", "alias.zsh"), "alias")
+	writeFixtureFile(t, filepath.Join(PackageRoot(repo, "zsh"), ".zshrc"), "source")
+	writeFixtureFile(t, filepath.Join(PackageRoot(repo, "zsh"), ".config", "zsh", "alias.zsh"), "alias")
 	return repo, home, Package{Name: "zsh"}
 }
 
@@ -52,8 +52,8 @@ func TestInspectPackageNotInstalled(t *testing.T) {
 
 func TestInspectPackageInstalledWithLeafLinks(t *testing.T) {
 	repo, home, pkg := zshFixture(t)
-	symlinkFixture(t, filepath.Join(repo, "zsh", ".zshrc"), filepath.Join(home, ".zshrc"))
-	symlinkFixture(t, filepath.Join(repo, "zsh", ".config", "zsh", "alias.zsh"), filepath.Join(home, ".config", "zsh", "alias.zsh"))
+	symlinkFixture(t, filepath.Join(PackageRoot(repo, "zsh"), ".zshrc"), filepath.Join(home, ".zshrc"))
+	symlinkFixture(t, filepath.Join(PackageRoot(repo, "zsh"), ".config", "zsh", "alias.zsh"), filepath.Join(home, ".config", "zsh", "alias.zsh"))
 
 	inspection, err := InspectPackage(repo, home, pkg)
 	if err != nil {
@@ -66,7 +66,7 @@ func TestInspectPackageInstalledWithLeafLinks(t *testing.T) {
 
 func TestInspectPackageIncomplete(t *testing.T) {
 	repo, home, pkg := zshFixture(t)
-	symlinkFixture(t, filepath.Join(repo, "zsh", ".zshrc"), filepath.Join(home, ".zshrc"))
+	symlinkFixture(t, filepath.Join(PackageRoot(repo, "zsh"), ".zshrc"), filepath.Join(home, ".zshrc"))
 
 	inspection, err := InspectPackage(repo, home, pkg)
 	if err != nil {
@@ -79,8 +79,8 @@ func TestInspectPackageIncomplete(t *testing.T) {
 
 func TestInspectPackageInstalledWithStowDirectoryLink(t *testing.T) {
 	repo, home, pkg := zshFixture(t)
-	symlinkFixture(t, filepath.Join(repo, "zsh", ".zshrc"), filepath.Join(home, ".zshrc"))
-	symlinkFixture(t, filepath.Join(repo, "zsh", ".config", "zsh"), filepath.Join(home, ".config", "zsh"))
+	symlinkFixture(t, filepath.Join(PackageRoot(repo, "zsh"), ".zshrc"), filepath.Join(home, ".zshrc"))
+	symlinkFixture(t, filepath.Join(PackageRoot(repo, "zsh"), ".config", "zsh"), filepath.Join(home, ".config", "zsh"))
 
 	inspection, err := InspectPackage(repo, home, pkg)
 	if err != nil {

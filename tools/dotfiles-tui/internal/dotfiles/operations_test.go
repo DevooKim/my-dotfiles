@@ -19,8 +19,8 @@ func TestApplyPlanCreatesMissingLeafLinks(t *testing.T) {
 	if _, err := Apply(context.Background(), plan, ApplyOptions{}); err != nil {
 		t.Fatal(err)
 	}
-	assertSameFile(t, filepath.Join(repo, "zsh", ".zshrc"), filepath.Join(home, ".zshrc"))
-	assertSameFile(t, filepath.Join(repo, "zsh", ".config", "zsh", "alias.zsh"), filepath.Join(home, ".config", "zsh", "alias.zsh"))
+	assertSameFile(t, filepath.Join(PackageRoot(repo, "zsh"), ".zshrc"), filepath.Join(home, ".zshrc"))
+	assertSameFile(t, filepath.Join(PackageRoot(repo, "zsh"), ".config", "zsh", "alias.zsh"), filepath.Join(home, ".config", "zsh", "alias.zsh"))
 }
 
 func TestApplyPlanSkipsConflictsByDefault(t *testing.T) {
@@ -41,7 +41,7 @@ func TestApplyPlanSkipsConflictsByDefault(t *testing.T) {
 	if string(content) != "keep me" {
 		t.Fatalf("conflict content = %q, want %q", content, "keep me")
 	}
-	assertSameFile(t, filepath.Join(repo, "zsh", ".config", "zsh", "alias.zsh"), filepath.Join(home, ".config", "zsh", "alias.zsh"))
+	assertSameFile(t, filepath.Join(PackageRoot(repo, "zsh"), ".config", "zsh", "alias.zsh"), filepath.Join(home, ".config", "zsh", "alias.zsh"))
 }
 
 func TestApplyPlanBacksUpApprovedConflict(t *testing.T) {
@@ -64,7 +64,7 @@ func TestApplyPlanBacksUpApprovedConflict(t *testing.T) {
 	if string(content) != "back me up" {
 		t.Fatalf("backup content = %q", content)
 	}
-	assertSameFile(t, filepath.Join(repo, "zsh", ".zshrc"), target)
+	assertSameFile(t, filepath.Join(PackageRoot(repo, "zsh"), ".zshrc"), target)
 }
 
 func TestApplyRollsBackAfterInjectedFailure(t *testing.T) {
@@ -177,7 +177,7 @@ func TestApplyRevalidatesParentsImmediatelyBeforeCreatingLink(t *testing.T) {
 
 func TestApplyRevalidatesCorrectMappingsBeforeMutation(t *testing.T) {
 	repo, home, pkg := zshFixture(t)
-	symlinkFixture(t, filepath.Join(repo, "zsh", ".zshrc"), filepath.Join(home, ".zshrc"))
+	symlinkFixture(t, filepath.Join(PackageRoot(repo, "zsh"), ".zshrc"), filepath.Join(home, ".zshrc"))
 	plan, err := BuildApplyPlan(repo, home, filepath.Join(home, ".dotfiles-backups", "stamp"), []Package{pkg}, nil)
 	if err != nil {
 		t.Fatal(err)
@@ -250,7 +250,7 @@ func TestRollbackDoesNotRestoreBackupThroughReplacedParent(t *testing.T) {
 
 func TestRemovePlanOnlyDeletesManagedLinks(t *testing.T) {
 	repo, home, pkg := zshFixture(t)
-	symlinkFixture(t, filepath.Join(repo, "zsh", ".zshrc"), filepath.Join(home, ".zshrc"))
+	symlinkFixture(t, filepath.Join(PackageRoot(repo, "zsh"), ".zshrc"), filepath.Join(home, ".zshrc"))
 	symlinkFixture(t, filepath.Join(home, "user-target"), filepath.Join(home, ".config", "zsh", "alias.zsh"))
 
 	plan, err := BuildRemovePlan(repo, home, []Package{pkg})
@@ -268,8 +268,8 @@ func TestRemovePlanOnlyDeletesManagedLinks(t *testing.T) {
 
 func TestRemovePlanRecognizesStowDirectoryLink(t *testing.T) {
 	repo, home, pkg := zshFixture(t)
-	symlinkFixture(t, filepath.Join(repo, "zsh", ".zshrc"), filepath.Join(home, ".zshrc"))
-	symlinkFixture(t, filepath.Join(repo, "zsh", ".config", "zsh"), filepath.Join(home, ".config", "zsh"))
+	symlinkFixture(t, filepath.Join(PackageRoot(repo, "zsh"), ".zshrc"), filepath.Join(home, ".zshrc"))
+	symlinkFixture(t, filepath.Join(PackageRoot(repo, "zsh"), ".config", "zsh"), filepath.Join(home, ".config", "zsh"))
 
 	plan, err := BuildRemovePlan(repo, home, []Package{pkg})
 	if err != nil {
@@ -324,7 +324,7 @@ func TestDoctorReportsLinksAndCommands(t *testing.T) {
 		Name:    "hammerspoon",
 		Command: "hs-that-is-missing",
 	}
-	writeFixtureFile(t, filepath.Join(repo, "hammerspoon", ".hammerspoon", "init.lua"), "config")
+	writeFixtureFile(t, filepath.Join(PackageRoot(repo, "hammerspoon"), ".hammerspoon", "init.lua"), "config")
 
 	findings := Doctor(repo, home, []Package{pkg, hammerspoon}, func(string) (string, error) {
 		return "", errors.New("missing")

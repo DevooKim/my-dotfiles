@@ -1,6 +1,6 @@
 # Dotfiles
 
-macOS 설정을 애플리케이션별로 관리하는 dotfiles 저장소입니다. 루트의 각 디렉터리가 독립적인 설정 패키지이며 `bin/setup` TUI에서 필요한 것만 골라 설치하거나 제거합니다.
+macOS 설정을 애플리케이션별로 관리하는 dotfiles 저장소입니다. `packages/`의 각 디렉터리가 독립적인 설정 패키지이며 `bin/setup` TUI에서 필요한 것만 골라 설치하거나 제거합니다.
 
 ## 설치
 
@@ -31,15 +31,15 @@ git clone https://github.com/DevooKim/my-dotfiles.git ~/.dotfiles
 
 | 앱 | 용도 | 설정 경로 |
 |---|---|---|
-| [AeroSpace](https://github.com/nikitabobko/AeroSpace) | 타일링 윈도우 관리자 | [`aerospace/`](aerospace/.config/aerospace) |
-| [Ghostty](https://github.com/ghostty-org/ghostty) | 터미널 | [`ghostty/`](ghostty/.config/ghostty) |
-| [Hammerspoon](https://github.com/Hammerspoon/hammerspoon) | macOS 자동화 및 단축키 | [`hammerspoon/`](hammerspoon/.hammerspoon) |
-| [Herdr](https://herdr.dev) | 에이전트 작업공간 | [`herdr/`](herdr/.config/herdr) |
-| [Rift](https://github.com/acsandmann/rift) | 윈도우 관리자 | [`rift/`](rift/.config/rift) |
-| [Starship](https://github.com/starship/starship) | 셸 프롬프트 | [`starship/`](starship/.config/starship.toml) |
-| [WezTerm](https://github.com/wezterm/wezterm) | 터미널 | [`wezterm/`](wezterm/.config/wezterm) |
-| [Zed](https://github.com/zed-industries/zed) | 코드 에디터 | [`zed/`](zed/.config/zed) |
-| [Zsh](https://www.zsh.org) | 셸 설정 | [`zsh/`](zsh) |
+| [AeroSpace](https://github.com/nikitabobko/AeroSpace) | 타일링 윈도우 관리자 | [`aerospace/`](packages/aerospace/.config/aerospace) |
+| [Ghostty](https://github.com/ghostty-org/ghostty) | 터미널 | [`ghostty/`](packages/ghostty/.config/ghostty) |
+| [Hammerspoon](https://github.com/Hammerspoon/hammerspoon) | macOS 자동화 및 단축키 | [`hammerspoon/`](packages/hammerspoon/.hammerspoon) |
+| [Herdr](https://herdr.dev) | 에이전트 작업공간 | [`herdr/`](packages/herdr/.config/herdr) |
+| [Rift](https://github.com/acsandmann/rift) | 윈도우 관리자 | [`rift/`](packages/rift/.config/rift) |
+| [Starship](https://github.com/starship/starship) | 셸 프롬프트 | [`starship/`](packages/starship/.config/starship.toml) |
+| [WezTerm](https://github.com/wezterm/wezterm) | 터미널 | [`wezterm/`](packages/wezterm/.config/wezterm) |
+| [Zed](https://github.com/zed-industries/zed) | 코드 에디터 | [`zed/`](packages/zed/.config/zed) |
+| [Zsh](https://www.zsh.org) | 셸 설정 | [`zsh/`](packages/zsh) |
 
 `homebrew/Brewfile`은 개발 환경 기록용이라 TUI가 다루지 않습니다.
 
