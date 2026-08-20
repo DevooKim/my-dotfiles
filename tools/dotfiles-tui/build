@@ -1,0 +1,33 @@
+#!/bin/sh
+
+set -eu
+
+tool_root=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+repo_root=$(CDPATH= cd -- "$tool_root/../.." && pwd)
+build_root=$(mktemp -d "$tool_root/.build.XXXXXX")
+
+cleanup() {
+  rm -f "$build_root/arm64" "$build_root/amd64" "$build_root/setup"
+  rmdir "$build_root" 2>/dev/null || true
+}
+trap cleanup EXIT HUP INT TERM
+
+cd "$tool_root"
+
+go test ./...
+go vet ./...
+
+for architecture in arm64 amd64; do
+  env CGO_ENABLED=0 GOOS=darwin GOARCH="$architecture" \
+    go build -trimpath -buildvcs=false -ldflags='-s -w -buildid=' \
+    -o "$build_root/$architecture" ./cmd/dotfiles-tui
+done
+
+lipo -create \
+  "$build_root/arm64" \
+  "$build_root/amd64" \
+  -output "$build_root/setup"
+chmod +x "$build_root/setup"
+mv "$build_root/setup" "$repo_root/setup"
+
+sh tests/universal_build_test.sh
