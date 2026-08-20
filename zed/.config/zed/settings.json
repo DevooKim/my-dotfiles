@@ -61,6 +61,8 @@
     "active_language_button": true
   },
   "project_panel": {
+    "auto_fold_dirs": false,
+    "auto_reveal_entries": true,
     "hide_root": false,
     "diagnostic_badges": false,
     "git_status_indicator": true,
