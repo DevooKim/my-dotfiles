@@ -1,0 +1,128 @@
+{
+  "use_system_window_tabs": false,
+  "focus_follows_mouse": {
+    "enabled": false
+  },
+  "bottom_dock_layout": "contained",
+  "preview_tabs": {
+    "enable_preview_from_project_panel": true
+  },
+  "tabs": {
+    "activate_on_close": "history",
+    "file_icons": false,
+    "git_status": false
+  },
+  "tab_bar": {
+    "show_pinned_tabs_in_separate_row": true,
+    "show_nav_history_buttons": true,
+    "show": true
+  },
+  "outline_panel": {
+    "dock": "right"
+  },
+  "collaboration_panel": {
+    "dock": "right"
+  },
+  "agent": {
+    "dock": "left",
+    "favorite_models": [],
+    "model_parameters": []
+  },
+  "git_panel": {
+    "dock": "right"
+  },
+  "title_bar": {
+    "show_menus": false,
+    "show_user_picture": true,
+    "show_user_menu": false,
+    "show_sign_in": false,
+    "show_onboarding_banner": true,
+    "show_project_items": true,
+    "show_worktree_name": true,
+    "show_branch_name": true,
+    "show_branch_status_icon": true
+  },
+  "debugger": {
+    "button": true
+  },
+  "search": {
+    "button": false
+  },
+  "diagnostics": {
+    "button": true
+  },
+  "terminal": {
+    "button": true
+  },
+  "status_bar": {
+    "show_active_file": false,
+    "line_endings_button": false,
+    "cursor_position_button": true,
+    "active_language_button": true
+  },
+  "project_panel": {
+    "hide_root": false,
+    "diagnostic_badges": false,
+    "git_status_indicator": true,
+    "bold_folder_labels": false,
+    "folder_icons": true,
+    "file_icons": true,
+    "entry_spacing": "comfortable",
+    "hide_gitignore": false,
+    "default_width": 240.0,
+    "dock": "right",
+    "button": true
+  },
+  "use_smartcase_search": true,
+  "colorize_brackets": false,
+  "code_lens": "off",
+  "inlay_hints": {
+    "show_background": false,
+    "show_type_hints": true,
+    "enabled": false
+  },
+  "toolbar": {
+    "code_actions": true,
+    "quick_actions": true,
+    "breadcrumbs": true
+  },
+  "scrollbar": {
+    "show": "auto"
+  },
+  "sticky_scroll": {
+    "enabled": true
+  },
+  "ui_font_size": 16.0,
+  "ui_font_weight": 500.0,
+  "ui_font_family": "Google Sans Code",
+  "ui_font_fallbacks": ["D2Coding"],
+  "icon_theme": {
+    "mode": "light",
+    "light": "Material Icon Theme",
+    "dark": "Zed (Default)"
+  },
+  "theme": {
+    "mode": "dark",
+    "light": "One Dark",
+    "dark": "One Dark Pro",
+  },
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+    "anthropic_retention": false,
+  },
+  "buffer_font_weight": 500.0,
+  "buffer_font_size": 16.0,
+  "buffer_font_family": "Google Sans Code",
+  "buffer_font_fallbacks": ["D2Coding"],
+  "vim": {
+    "cursor_shape": {
+
+    },
+    "toggle_relative_line_numbers": false,
+    "use_smartcase_find": true,
+    "use_system_clipboard": "on_yank",
+  },
+  "base_keymap": "VSCode",
+  "vim_mode": true,
+}
