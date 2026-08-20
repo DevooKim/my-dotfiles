@@ -1,11 +1,5 @@
 package dotfiles
 
-import (
-	"fmt"
-	"os"
-	"path/filepath"
-)
-
 // Severity identifies a Doctor finding's impact.
 type Severity string
 
@@ -26,7 +20,7 @@ type Finding struct {
 // LookPath resolves one declared executable.
 type LookPath func(string) (string, error)
 
-// Doctor inspects sources, links, commands, references, and Git availability.
+// Doctor inspects sources, links, commands, and Git availability.
 func Doctor(repo, home string, packages []Package, lookPath LookPath) []Finding {
 	var findings []Finding
 	if _, err := lookPath("git"); err != nil {
@@ -52,19 +46,6 @@ func Doctor(repo, home string, packages []Package, lookPath LookPath) []Finding 
 				findings = append(findings, Finding{SeverityWarning, pkg.Name, "command-missing", pkg.Command})
 			} else {
 				findings = append(findings, Finding{SeverityOK, pkg.Name, "command-present", pkg.Command})
-			}
-		}
-
-		for _, reference := range pkg.References {
-			path := filepath.Join(repo, pkg.Name, reference)
-			if _, err := os.Lstat(path); err != nil {
-				detail := reference
-				if !os.IsNotExist(err) {
-					detail = fmt.Sprintf("%s: %v", reference, err)
-				}
-				findings = append(findings, Finding{SeverityWarning, pkg.Name, "reference-missing", detail})
-			} else {
-				findings = append(findings, Finding{SeverityOK, pkg.Name, "reference-present", reference})
 			}
 		}
 	}

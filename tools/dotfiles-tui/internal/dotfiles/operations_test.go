@@ -317,15 +317,14 @@ func TestGitUpdateUsesOnlyFastForwardPull(t *testing.T) {
 	}
 }
 
-func TestDoctorReportsLinksCommandsAndReferences(t *testing.T) {
+func TestDoctorReportsLinksAndCommands(t *testing.T) {
 	repo, home, pkg := zshFixture(t)
 	writeFixtureFile(t, filepath.Join(home, ".zshrc"), "conflict")
 	hammerspoon := Package{
-		Name:       "hammerspoon",
-		Command:    "hs-that-is-missing",
-		References: []string{".hammerspoon/modules/input/tmux_lang.lua"},
+		Name:    "hammerspoon",
+		Command: "hs-that-is-missing",
 	}
-	writeFixtureFile(t, filepath.Join(repo, "hammerspoon", ".hammerspoon", "init.lua"), "require modules.input.tmux_lang")
+	writeFixtureFile(t, filepath.Join(repo, "hammerspoon", ".hammerspoon", "init.lua"), "config")
 
 	findings := Doctor(repo, home, []Package{pkg, hammerspoon}, func(string) (string, error) {
 		return "", errors.New("missing")
@@ -338,7 +337,6 @@ func TestDoctorReportsLinksCommandsAndReferences(t *testing.T) {
 	for _, want := range []string{
 		"warning zsh link-status conflict",
 		"warning hammerspoon command-missing hs-that-is-missing",
-		"warning hammerspoon reference-missing .hammerspoon/modules/input/tmux_lang.lua",
 	} {
 		if !strings.Contains(report, want) {
 			t.Fatalf("Doctor report missing %q:\n%s", want, report)

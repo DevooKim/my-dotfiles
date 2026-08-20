@@ -5,7 +5,6 @@ type Package struct {
 	Name        string
 	Description string
 	Command     string
-	References  []string
 }
 
 // Catalog returns the packages in their stable UI order.
@@ -17,7 +16,6 @@ func Catalog() []Package {
 			Name:        "hammerspoon",
 			Description: "Hammerspoon automation",
 			Command:     "hs",
-			References:  []string{".hammerspoon/modules/input/tmux_lang.lua"},
 		},
 		{Name: "herdr", Description: "Herdr agent workspace", Command: "herdr"},
 		{Name: "rift", Description: "Rift window manager", Command: "rift"},

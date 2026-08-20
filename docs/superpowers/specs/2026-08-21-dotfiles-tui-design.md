@@ -87,10 +87,8 @@ never removes regular files, wrong-target links, parent directories, or
 backups, and it never restores backups automatically.
 
 Doctor is read-only. It reports missing package sources, correct/missing/
-partial/conflicting destinations, declared runtime commands, declared internal
-references, and Git availability. It warns about the known missing Hammerspoon
-`modules.input.tmux_lang` reference without fixing it. Doctor never installs or
-repairs anything.
+partial/conflicting destinations, declared runtime commands, and Git
+availability. Doctor never installs or repairs anything.
 
 ## Transaction Safety
 

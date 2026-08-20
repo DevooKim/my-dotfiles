@@ -50,7 +50,7 @@ var actions = []actionItem{
 	{"Reapply", "Repair selected settings and preserve correct links"},
 	{"Update", "Fast-forward this repository, then reapply settings"},
 	{"Remove", "Remove only links managed by selected settings"},
-	{"Doctor", "Inspect sources, links, commands, references, and Git"},
+	{"Doctor", "Inspect sources, links, commands, and Git"},
 }
 
 // Dependencies contains side-effect boundaries used by the Bubble Tea model.
