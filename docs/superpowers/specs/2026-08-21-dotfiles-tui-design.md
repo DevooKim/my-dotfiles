@@ -67,10 +67,11 @@ parent paths are conflicts.
 
 The first screen offers Install, Reapply, Update, Remove, and Doctor.
 
-Install and Reapply show the flat package checklist. Install initially selects
-only not-installed packages, while Reapply initially selects fully installed
-packages. They calculate a preview before mutation. Each conflict
-defaults to Skip and may be changed to Back up and continue. Approved conflicts
+Install, Reapply, and Remove show the flat package checklist. Install initially
+selects only not-installed packages. Reapply and Remove initially select
+nothing, including Reapply opened after Update. Manual package toggles and the
+Select all action remain available. They calculate a preview before mutation.
+Each conflict defaults to Skip and may be changed to Back up and continue. Approved conflicts
 move to `~/.dotfiles-backups/<YYYYMMDD-HHMMSS>/<original-relative-path>` before
 linking. The backup location is outside the repository and needs no gitignore
 rule. Correct links remain untouched.
