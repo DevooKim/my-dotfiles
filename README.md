@@ -6,6 +6,18 @@ macOS 설정을 애플리케이션별로 관리하는 dotfiles 저장소입니�
 
 ## 설치 및 실행
 
+간편 설치 스크립트가 추가되면 다음 명령으로 저장소를 설치하고 TUI를
+실행할 수 있습니다.
+
+```bash
+curl -fsSL \
+  https://raw.githubusercontent.com/DevooKim/my-dotfiles/main/install.sh \
+  | sh
+```
+
+> 현재 저장소에는 `install.sh`가 아직 없습니다. 위 명령은 설치 스크립트가
+> 추가된 이후 사용할 수 있습니다.
+
 현재는 저장소를 직접 복제한 뒤 TUI를 실행합니다.
 
 ```bash
@@ -49,19 +61,10 @@ git clone https://github.com/DevooKim/my-dotfiles.git ~/.dotfiles
 간편 설치 스크립트를 추가할 경우 저장소의 `install.sh`를
 `raw.githubusercontent.com`에서 직접 실행하는 방식을 사용합니다.
 
-```bash
-curl -fsSL \
-  https://raw.githubusercontent.com/DevooKim/my-dotfiles/main/install.sh \
-  | sh
-```
-
 설치 스크립트는 `~/.dotfiles`에 저장소를 복제하거나 fast-forward 방식으로
 갱신한 뒤 `~/.dotfiles/bin/setup`을 실행해야 합니다. 설정 파일과 Git 이력이
 필요하므로 `bin/setup` 바이너리만 단독으로 내려받는 방식은 사용하지
 않습니다.
-
-> 현재 저장소에는 `install.sh`가 아직 없습니다. 위 명령은 설치 스크립트가
-> 추가된 이후 사용할 수 있습니다.
 
 ## 개발 및 빌드
 
