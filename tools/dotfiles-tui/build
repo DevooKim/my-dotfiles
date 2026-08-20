@@ -16,6 +16,7 @@ cd "$tool_root"
 
 go test ./...
 go vet ./...
+sh tests/install_script_test.sh
 
 for architecture in arm64 amd64; do
   env CGO_ENABLED=0 GOOS=darwin GOARCH="$architecture" \
