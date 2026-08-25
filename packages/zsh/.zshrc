@@ -34,6 +34,9 @@ bindkey -e
 [[ -s "$HOME/.bun/_bun" ]] && source "$HOME/.bun/_bun"
 
 # Tools and plugins
+[[ -r "$HOME/.config/lsd/init.zsh" ]] && \
+  source "$HOME/.config/lsd/init.zsh"
+
 if (( $+commands[fnm] )); then
   eval "$(fnm env --use-on-cd --log-level=quiet --shell zsh)"
 fi

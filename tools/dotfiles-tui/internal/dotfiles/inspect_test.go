@@ -118,7 +118,7 @@ func TestInspectPackageConflictForBrokenLink(t *testing.T) {
 }
 
 func TestCatalogIsFlatAndComplete(t *testing.T) {
-	want := []string{"aerospace", "ghostty", "hammerspoon", "herdr", "rift", "starship", "wezterm", "zed", "zsh"}
+	want := []string{"aerospace", "ghostty", "hammerspoon", "herdr", "lsd", "rift", "starship", "wezterm", "zed", "zsh"}
 	got := Catalog()
 	if len(got) != len(want) {
 		t.Fatalf("catalog length = %d, want %d", len(got), len(want))

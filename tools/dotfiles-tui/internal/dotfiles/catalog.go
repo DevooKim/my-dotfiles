@@ -28,6 +28,7 @@ func Catalog() []Package {
 			Command:     "hs",
 		},
 		{Name: "herdr", Description: "Herdr agent workspace", Command: "herdr"},
+		{Name: "lsd", Description: "lsd directory listing", Command: "lsd"},
 		{Name: "rift", Description: "Rift window manager", Command: "rift"},
 		{Name: "starship", Description: "Starship shell prompt", Command: "starship"},
 		{Name: "wezterm", Description: "WezTerm terminal", Command: "wezterm"},
