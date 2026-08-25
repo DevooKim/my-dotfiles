@@ -74,3 +74,6 @@ fi
 # Must be loaded after all other ZLE plugins.
 [[ -r "$HOME/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
   source "$HOME/.local/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+
+# bun completions
+[ -s "/Users/hyunwookim/.bun/_bun" ] && source "/Users/hyunwookim/.bun/_bun"

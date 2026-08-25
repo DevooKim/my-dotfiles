@@ -1,4 +1,25 @@
 {
+  "proxy": "",
+  "git": {
+    "disable_git": false
+  },
+  "active_pane_modifiers": {
+    
+  },
+  "agent_servers": {
+    "codex-acp": {
+      "default_config_options": {
+        "reasoning_effort": "high",
+        "model": "gpt-5.6-luna"
+      },
+      "type": "registry"
+    }
+  },
+  "centered_layout": {
+    "left_padding": null,
+    "right_padding": 0.2
+  },
+  "cli_default_open_behavior": "existing_window",
   "use_system_window_tabs": false,
   "focus_follows_mouse": {
     "enabled": false
@@ -18,9 +39,12 @@
     "show": true
   },
   "outline_panel": {
+    "file_icons": true,
+    "button": true,
     "dock": "right"
   },
   "collaboration_panel": {
+    "button": false,
     "dock": "right"
   },
   "agent": {
@@ -29,6 +53,10 @@
     "model_parameters": []
   },
   "git_panel": {
+    "file_icons": false,
+    "tree_view": true,
+    "fallback_branch_name": "main",
+    "status_style": "icon",
     "dock": "right"
   },
   "title_bar": {
@@ -52,6 +80,7 @@
     "button": true
   },
   "terminal": {
+    "dock": "right",
     "button": true
   },
   "status_bar": {

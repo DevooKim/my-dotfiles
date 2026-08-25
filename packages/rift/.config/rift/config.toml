@@ -455,7 +455,7 @@ comb1 = "Alt + Shift"
 "comb1 + 3" = { move_window_to_workspace = 2 }
 "comb1 + 4" = { move_window_to_workspace = 3 }
 
-"Alt + Tab" = "switch_to_last_workspace"
+# "Alt + Tab" = "switch_to_last_workspace"
 
 # commands to change the layout engine of the active workspace
 # "Alt + Ctrl + 1" = { set_workspace_layout = { mode = "traditional" } }
