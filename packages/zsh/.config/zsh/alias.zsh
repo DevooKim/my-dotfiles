@@ -1,8 +1,9 @@
 # Navigation
 alias ..='cd ..'
 alias ...='cd ../..'
-alias ll='ls -lah'
-alias la='ls -A'
+alias ls='lsd'
+alias ll='lsd -lah'
+alias la='lsd -A'
 alias reload='source ~/.zshrc'
 alias cls='clear'
 
