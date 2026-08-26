@@ -7,6 +7,8 @@ path=(
   ${path:#$HOME/.antigravity/antigravity/bin}
 )
 
+export DEVOOKIM_SKILLS_REPO="$HOME/Dev/settings/my-agents"
+
 # History
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=5000
