@@ -35,6 +35,7 @@ git clone https://github.com/DevooKim/my-dotfiles.git ~/.dotfiles
 | [Ghostty](https://github.com/ghostty-org/ghostty) | 터미널 | [`ghostty/`](packages/ghostty/.config/ghostty) |
 | [Hammerspoon](https://github.com/Hammerspoon/hammerspoon) | macOS 자동화 및 단축키 | [`hammerspoon/`](packages/hammerspoon/.hammerspoon) |
 | [Herdr](https://herdr.dev) | 에이전트 작업공간 | [`herdr/`](packages/herdr/.config/herdr) |
+| [Herdr app](https://herdr.dev) | 에이전트 작업공간 앱 (키·설정·mod) | [`herdr-app/`](packages/herdr-app/.config/herdr-app) |
 | [lsd](https://github.com/lsd-rs/lsd) | 디렉터리 목록과 색상 | [`lsd/`](packages/lsd/.config/lsd) |
 | [Rift](https://github.com/acsandmann/rift) | 윈도우 관리자 | [`rift/`](packages/rift/.config/rift) |
 | [Starship](https://github.com/starship/starship) | 셸 프롬프트 | [`starship/`](packages/starship/.config/starship.toml) |
